@@ -29,9 +29,10 @@ q=6         # constant 1 in the saving function
 c=A*2       # constant 2 in the saving function
 
 
-k_0=0.03    # Initial capital labor ratio (must be between 0 and (a*A/c)**(1/(1-a)) )
+k_0=0.03  # Initial capital labor ratio (must be between 0 and (a*A/c)**(1/(1-a)) )
 
 
+print()
     
 # Define a function that returns a sequence containing the values for each period for variables that grow at a constant rate
 def time_series(x_0, growth_rate, t):
@@ -51,18 +52,17 @@ def s(q, c, r_t,k_t,y_t):
 
 
 #Define Law of motion of capital
-def s(q, c, r_t,k_t,y_t):
-    return q*(1-c/r_t)*k_t/y_t
+def g(q, c, r_t,k_t,y_t):
+    return min((1+rho)*k_t,S_t*y_t)/(1+n)
 
 
-# Compute the sequences of values of the different variables for each period
+# Compute the sequences of values of population and time for each period
 
 L=time_series(L_0,n,t)
-
 T=[i for i in range(t)]
 
 
-# Rewrite the variables in per capita terms
+# Compute variables in per capita terms
 try:
     k=[]
     y=[]
@@ -72,9 +72,10 @@ try:
             y_t=A*k_0**a
         else:
             r_t=a*y_t/k_t
-            S_t=q*(1-c/r_t)*k_t/y_t
-            k_t=min((1+rho)*k_t,S_t*y_t)/(1+n)
+            S_t=s(q, c, r_t,k_t,y_t)
+            k_t=g(q, c, r_t,k_t,y_t)
             y_t=A*k_t**a
+            
         k.append(k_t)
         y.append(y_t)
 
@@ -83,41 +84,39 @@ try:
 
     #Graphs
 
-    fig, axs = plt.subplots(2,1)
+    fig, axs = plt.subplots(3,1, gridspec_kw={'hspace':0.3},height_ratios=[1,1,2])
 
     fig.set_figwidth(7)
-    fig.suptitle("Day (1982) - Example 4\n"+"\n"+'Growth and Cycles in GDP')
+    fig.set_figheight(12)
+
+    fig.suptitle("Day (1982) - Example 4\n"+"\n"+'Growth and Cycles in GDP\n\n')
 
 
     axs[0].plot(T, y, color="navy")
     axs[0].set_title('GDP per capita')
-
-
+    axs[0].set_ylabel(r'$y$')
+    axs[0].set_xlabel('Time')
 
 
     axs[1].plot(T, k, color="navy")
     axs[1].set_title('Capital-labor ratio')
+    axs[1].set_ylabel(r'$k$')
+    axs[1].set_xlabel('Time')
 
 
 
-    fig.tight_layout()
+    axs[2].plot(T, Y, color="navy")
+    axs[2].set_xlabel('Time')
+    axs[2].set_title('GDP')
+    axs[2].set_ylabel('GDP')
 
-
-    fig, axs = plt.subplots()
-    fig.set_figwidth(8)
-
-    plt.plot(T, Y, color="navy")
-    plt.xlabel('Time')
-    plt.title('GDP')
-    plt.ylabel('GDP')
     plt.show()
-    
+
 except Exception as e:
     if k_0 > (a*A/c)**(1/(1-a)):
         print("k_0 does not take an acceptable value\n\nPlease insert a value between 0 and",(a*A/c)**(1/(1-a)))
     else:
         print(e)
-    
 
 ```
 

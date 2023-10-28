@@ -8,7 +8,7 @@ where $q$ and $c$ are exogenous parameters whereas $r_t$ is the interest rate at
 $$r_t=\alpha \frac{y_t}{k_t}$$
 
 Furthermore, assume that the law of motion of capital takes the following form: 
-$$k_{t+1}=\frac{min\{ (1+\rho) k_{t}, \ s(k_t)y_t \} }{1+n}$$
+$$k_{t+1}=\frac{min [ (1+\rho) k_{t}, \ s(k_t)y_t ] }{1+n}$$
 
 where $\rho$ is the maximal growth rate of capital. Day (1957) proposes several explanations why such a limitation may arise, including behavioural reasons or possible costs of adjustment.
 

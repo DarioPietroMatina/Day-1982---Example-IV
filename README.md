@@ -10,7 +10,7 @@ $$r_t=\alpha \frac{y_t}{k_t}$$
 Furthermore, assume that the law of motion of capital takes the following form: 
 $$k_{t+1}=\frac{min [ (1+\rho) k_{t}, \ s(k_t)y_t ] }{1+n}$$
 
-where $\rho$ is the maximal growth rate of capital. Day (1957) proposes several explanations why such a limitation may arise, including behavioural reasons or possible costs of adjustment.
+where $\rho$ is the maximal growth rate of capital. Day (1982) proposes several explanations why such a limitation may arise, including behavioural reasons or possible costs of adjustment.
 
 ## Code
 Choose   $k_0$   such that   $k_0<(\alpha A/c)^{\frac{1}{1-\alpha}}$   otherwise a solution may fail to exist.
